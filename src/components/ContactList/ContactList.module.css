@@ -1,0 +1,10 @@
+.list{
+    flex-direction: row;
+    display: flex;
+    list-style: none;
+    padding: 2px;
+    gap: 10px;
+    flex-wrap: wrap;
+    border: 1px solid green;
+    border-radius: 5px;
+}
