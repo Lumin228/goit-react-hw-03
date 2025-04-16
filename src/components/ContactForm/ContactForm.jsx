@@ -8,7 +8,7 @@ const feedbackSchema = Yup.object().shape({
     phone: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required("Required")
   });
 
-  const initValues = {username: "", phone: ""}
+const initValues = {username: "", phone: ""}
 
 
 export const ContactForm = ({onCreate}) => {
