@@ -3,7 +3,7 @@ import { SearchBox } from '../SearchBox/SearchBox';
 import { ContactList } from '../ContactList/ContactList';
 import { ContactForm } from '../ContactForm/ContactForm';
 import './App.css'
-import * as Yup from "yup";
+
 
 
 
@@ -27,12 +27,9 @@ function App() {
 
   
 
-  const initValues = {username: "", phone: ""}
+  
 
-  const FeedbackSchema = Yup.object().shape({
-    username: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required("Required"),
-    phone: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required("Required")
-  });
+
   
   useEffect(() => {
     localStorage.setItem(CONTACTSBOOK, JSON.stringify(contacts));
@@ -45,12 +42,10 @@ function App() {
     setContact(evt.target.value)
   }
 
-  const createNewContact = (evt, actions) => {
-    const contact = {id: crypto.randomUUID(), name: evt.username, number: evt.phone}
+  const createNewContact = (values) => {
+    const contact = {id: crypto.randomUUID(), name: values.username, number: values.phone}
     setContacts((prev) => [...prev, contact])
-    actions.resetForm();
-    evt.username.value = ""
-    evt.phone.value = ""
+    
   }
   
   const filteredContacts = contacts.filter((cont) =>
@@ -64,7 +59,7 @@ function App() {
   return (
     <div>
       <h1>Phonebook</h1>
-      <ContactForm initialValues={initValues} validation={FeedbackSchema} onCreate={createNewContact} />
+      <ContactForm onCreate={createNewContact} />
       <SearchBox onChange={search} />
       <ContactList contactsData={filteredContacts} onSubmit={deleteContact}/>
     </div>
