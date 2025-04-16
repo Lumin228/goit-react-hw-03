@@ -1,17 +1,17 @@
 import css from '../ContactForm/ContactForm.module.css'
 import { Formik, Form, Field, ErrorMessage } from "formik"
-import { useEffect, useId } from 'react'
+import { useId } from 'react'
 import * as Yup from "yup";
 
-
-export const ContactForm = ({onCreate}) => {
-    
-      const FeedbackSchema = Yup.object().shape({
+const feedbackSchema = Yup.object().shape({
     username: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required("Required"),
     phone: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required("Required")
   });
 
   const initValues = {username: "", phone: ""}
+
+
+export const ContactForm = ({onCreate}) => {
 
     const phone = useId();
     const name = useId();
@@ -24,7 +24,7 @@ export const ContactForm = ({onCreate}) => {
     return(
     <div>
         <Formik
-        validationSchema={FeedbackSchema}
+        validationSchema={feedbackSchema}
          initialValues={initValues}
         onSubmit={onSubmit}
         >
